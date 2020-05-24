@@ -25,6 +25,7 @@ public class DesignPattern_final {
                 + "                                                 \n"
                 + "by Pisitchai Siriratanachaikul 60050223 \n");
         while (true) {
+            printBox(0);
             System.out.print("𝙎𝙚𝙡𝙚𝙘𝙩 𝙖𝙣 𝙤𝙥𝙩𝙞𝙤𝙣 \n"
                     + "1:view data \n"
                     + "2:add data \n"
@@ -38,6 +39,7 @@ public class DesignPattern_final {
                 case 0:
                     return;
                 case 1:
+                    printBox(1);
                     System.out.print("View option \n"
                             + "1:view case data \n"
                             + "2:view type data \n"
@@ -53,6 +55,7 @@ public class DesignPattern_final {
                     }
                     break;
                 case 2:
+                    printBox(1);
                     System.out.print("Add option \n"
                             + "1:case \n"
                             + "2:type \n"
@@ -68,6 +71,7 @@ public class DesignPattern_final {
                     }
                     break;
                 case 3:
+                    printBox(1);
                     System.out.print("Remove option \n"
                             + "1:case \n"
                             + "2:type \n"
@@ -84,6 +88,7 @@ public class DesignPattern_final {
 
                     break;
                 case 4:
+                    printBox(1);
                     System.out.print("Update option \n"
                             + "1:case \n"
                             + "2:type \n"
@@ -91,13 +96,12 @@ public class DesignPattern_final {
                     option = sc.nextInt();
                     switch (option) {
                         case 1:
-
+                            editCaseData();
                             break;
                         case 2:
-
+                            editTypeData();
                             break;
                     }
-
                     break;
                 default:
             }
@@ -156,7 +160,6 @@ public class DesignPattern_final {
                 _type.printParent(id);
                 break;
             default:
-
         }
 
     }
@@ -235,11 +238,38 @@ public class DesignPattern_final {
     }
 
     public static void editTypeData() {
+        Scanner sc = new Scanner(System.in);
+        String name;
+        int id;
+        System.out.println("+-- edit type --+");
+        _type.printChild(0);
+        System.out.print("enter Id: ");
+        id = sc.nextInt();
+        System.out.print("enter new name: ");
+        name = sc.next();
+        _type.EditType(id, name);
+
+    }
+
+    static void printBox(int n) {
+
+        switch (n) {
+            case 0:
+                System.out.println("                                                                 \n"
+                        + " ___  ___  ___  ___  ___  ___  ___  ___  ___  ___  ___  ___  ___ \n"
+                        + "(___)(___)(___)(___)(___)(___)(___)(___)(___)(___)(___)(___)(___)\n"
+                        + "                                                                 ");
+                break;
+            case 1:
+                System.out.println(
+                        "_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ \n");
+                break;
+        }
 
     }
 
     public static void testset() {
-        _type.AddType(0, "all type");
+        _type.AddType(0, "infected");
         _type.AddType(1, "travel");
         _type.AddType(2, "asia");
         _type.AddType(3, "europe");
@@ -249,7 +279,7 @@ public class DesignPattern_final {
         _type.AddType(7, "bangkok");
         _type.AddType(8, "university");
         _type.AddType(9, "airport");
-        _type.AddType(10, "suwannaphom");
+        _type.AddType(10, "suvannaphom");
         _type.AddType(11, "kmitl");
 
         _type.AddChild(0, 1);

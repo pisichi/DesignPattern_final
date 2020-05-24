@@ -25,10 +25,9 @@ public class CaseTypeController {
         t.remove();
     }
 
-    public void EditType (int id, String name) {
-        CaseType t = new CaseType();
-        //t.edit(0);
-        t.add();
+    public void EditType (int id,String name) {
+        CaseType t = SearchType(id);
+        t.edit(name);
     }
 
     public void AddChild(int momId, int childId) {
@@ -62,7 +61,6 @@ public class CaseTypeController {
     public void printChild(int id) {
         CaseType type = SearchType(id);
         type.printChild(0);
-        type.update(0);
 
     }
 

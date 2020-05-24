@@ -72,29 +72,55 @@ public class CaseType {
         relation.add(child);
     }
 
+    public void edit(String name) {
+        this.name = name;
+        updateEdit(0);
+    }
+
     public void remove() {
 
+        //remove childs from parent
         if (parent != null) {
             ArrayList<CaseType> parentRelation = parent.getRelation();
             parentRelation.remove(this);
             parent.setRelation(parentRelation);
-            instance.allType.set(parent.id, parent);
+            instance.allType.set(instance.allType.indexOf(parent), parent);
         }
+        updateRemove(0);
+
     }
 
-    public void edit(int id, String name) {
-        this.id = id;
-        this.name = name;
-        update(0);
-    }
+    // change type in case when casetype got Remove
+    public void updateRemove(int depth) {
 
-    public void update(int depth) {
-
-        System.out.println(name);
+        System.out.println("    Remove:" + name );
+        for (int i = 0; i < instance.allCase.size(); i++) {
+            CaseData t = (CaseData) instance.allCase.get(i);
+            if (t.getType().id == this.id) {
+                t.setType((CaseType) instance.allType.get(0));
+                instance.allCase.set(instance.allCase.indexOf(t), t);
+                 System.out.println("       - Update case:" + t.getId());
+            }
+        }
         for (CaseType child : relation) {
-            child.update(depth + 1);
+            child.updateRemove(depth + 1);
         }
 
+    }
+     // change type in case when casetype got update
+        public void updateEdit(int depth) {
+
+        for (int i = 0; i < instance.allCase.size(); i++) {
+            CaseData t = (CaseData) instance.allCase.get(i);
+            if (t.getType().id == this.id) {
+                t.setType(this);
+                instance.allCase.set(instance.allCase.indexOf(t), t);
+                System.out.println("    Update case:" + t.getId());
+            }
+        }
+        for (CaseType child : relation) {
+            child.updateEdit(depth + 1);
+        }
     }
 
     public void add() {

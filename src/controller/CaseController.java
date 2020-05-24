@@ -22,6 +22,19 @@ public class CaseController {
         t.setType(type);
         t.add();
     }
+    
+     public void editCase(int id, int age, String gender, String date, String province, int cid, int typeId) {
+        CaseData t = new CaseData();
+        CaseType type = _type.SearchType(typeId);
+        t.setId(id);
+        t.setAge(age);
+        t.setGender(gender);
+        t.setDate(date);
+        t.setProvince(province);
+        t.setCid(cid);
+        t.setType(type);
+        t.add();
+    }
 
     public void RemoveCase(int id) {
         CaseData t = SearchCase(id);
