@@ -1,7 +1,6 @@
 package controller;
 
 import designpattern_final.Singleton;
-import java.util.ArrayList;
 import model.CaseData;
 import model.CaseType;
 
@@ -22,9 +21,9 @@ public class CaseController {
         t.setType(type);
         t.add();
     }
-    
-     public void editCase(int id, int age, String gender, String date, String province, int cid, int typeId) {
-        CaseData t = new CaseData();
+
+    public void EditCase(int id, int age, String gender, String date, String province, int cid, int typeId) {
+        CaseData t = SearchCase(id);
         CaseType type = _type.SearchType(typeId);
         t.setId(id);
         t.setAge(age);
@@ -33,16 +32,23 @@ public class CaseController {
         t.setProvince(province);
         t.setCid(cid);
         t.setType(type);
-        t.add();
+        instance.allCase.set(instance.allCase.indexOf(t), t);
     }
 
     public void RemoveCase(int id) {
         CaseData t = SearchCase(id);
+        for (int i = 0; i < instance.allCase.size(); i++) {
+            CaseData n = (CaseData) instance.allCase.get(i);
+            if (n.getCid() == t.getId()) {
+                n.setCid(0);
+                instance.allCase.set(instance.allCase.indexOf(n), n);
+            }
+        }
         t.remove();
     }
 
     public CaseData SearchType(int typeId) {
-        
+
         for (int i = 0; i < instance.allCase.size(); i++) {
             CaseData t = (CaseData) instance.allCase.get(i);
             if (t.getType().getId() == typeId) {
@@ -72,6 +78,7 @@ public class CaseController {
 
     }
 
+    //print all case
     public void print() {
 
         for (int i = 0; i < instance.allCase.size(); i++) {

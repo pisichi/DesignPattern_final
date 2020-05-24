@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
 import designpattern_final.Singleton;
-import java.util.ArrayList;
 
-/**
- *
- * @author User
- */
+
 public class CaseData {
 
     Singleton instance = Singleton.getInstance();

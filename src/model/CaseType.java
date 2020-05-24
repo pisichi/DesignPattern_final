@@ -2,12 +2,8 @@ package model;
 
 import designpattern_final.Singleton;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-/**
- *
- * @author User
- */
+
 public class CaseType {
 
     Singleton instance = Singleton.getInstance();

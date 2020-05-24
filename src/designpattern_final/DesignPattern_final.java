@@ -12,6 +12,7 @@ public class DesignPattern_final {
 
     public static void main(String[] args) {
 
+        //set demo data
         testset();
 
         Scanner sc = new Scanner(System.in);
@@ -23,10 +24,10 @@ public class DesignPattern_final {
                 + "| \\__/\\ | | (_| | | |_| | (_| |      _| |_.___/ /\n"
                 + " \\____/_|  \\__,_|_|\\__|_|\\__,_|      \\___/\\____/ \n"
                 + "                                                 \n"
-                + "by Pisitchai Siriratanachaikul 60050223 \n");
+                + "Pisitchai Siriratanachaikul 60050223 \n");
         while (true) {
             printBox(0);
-            System.out.print("𝙎𝙚𝙡𝙚𝙘𝙩 𝙖𝙣 𝙤𝙥𝙩𝙞𝙤𝙣 \n"
+            System.out.print("Select Option \n"
                     + "1:view data \n"
                     + "2:add data \n"
                     + "3:remove data \n"
@@ -106,7 +107,6 @@ public class DesignPattern_final {
                 default:
             }
         }
-
     }
 
     public static void viewCaseData() {
@@ -119,9 +119,12 @@ public class DesignPattern_final {
         System.out.print("view case \n"
                 + "1:view by type \n"
                 + "2:view infection line \n"
+                + "0:break \n"
                 + "--->: ");
         option = sc.nextInt();
         switch (option) {
+            case 0:
+                break;
             case 1:
                 _type.printChild(0);
                 System.out.print("enter type Id: ");
@@ -148,15 +151,21 @@ public class DesignPattern_final {
         System.out.print("view type \n"
                 + "1:view child \n"
                 + "2:view parent \n"
+                + "0:break \n"
                 + "--->: ");
         option = sc.nextInt();
-        System.out.print("enter type Id: ");
-        id = sc.nextInt();
+
         switch (option) {
+            case 0:
+                break;
             case 1:
+                System.out.print("enter type Id: ");
+                id = sc.nextInt();
                 _type.printChild(id);
                 break;
             case 2:
+                System.out.print("enter type Id: ");
+                id = sc.nextInt();
                 _type.printParent(id);
                 break;
             default:
@@ -186,8 +195,13 @@ public class DesignPattern_final {
         date = sc.next();
         System.out.print("enter province: ");
         province = sc.next();
-        System.out.print("enter cause: ");
-        cid = sc.nextInt();
+        System.out.println("has parent? (infested from....(Y/N)");
+        if (sc.next().equalsIgnoreCase("Y")) {
+            System.out.print("enter parent id: ");
+            cid = sc.nextInt();
+        } else {
+            cid = 0;
+        }
         System.out.print("enter typeId: ");
         typeId = sc.nextInt();
         _case.AddCase(id, age, gender, date, province, cid, typeId);
@@ -200,7 +214,7 @@ public class DesignPattern_final {
         String name;
         int pid;
         Scanner sc = new Scanner(System.in);
-        System.out.print("+-- add type --+");
+        System.out.println("+-- add type --+");
         System.out.print("enter Id: ");
         id = sc.nextInt();
         System.out.print("enter name: ");
@@ -219,7 +233,6 @@ public class DesignPattern_final {
         System.out.print("enter Id: ");
         id = sc.nextInt();
         _case.RemoveCase(id);
-
     }
 
     public static void removeTypeData() {
@@ -229,11 +242,45 @@ public class DesignPattern_final {
         _type.printChild(0);
         System.out.print("enter Id: ");
         id = sc.nextInt();
+        if(id==0)
+             System.out.println("cannot delete main node");
         _type.RemoveType(id);
-
     }
 
     public static void editCaseData() {
+        Scanner sc = new Scanner(System.in);
+        int id;
+        int age;
+        String gender;
+        String date;
+        String province;
+        int cid;
+        int typeId;
+
+        _case.print();
+
+        System.out.println("+-- Edit case --+");
+        System.out.print("enter Id: ");
+        id = sc.nextInt();
+        System.out.print("enter age: ");
+        age = sc.nextInt();
+        System.out.print("enter gender: ");
+        gender = sc.next();
+        System.out.print("enter date: ");
+        date = sc.next();
+        System.out.print("enter province: ");
+        province = sc.next();
+        System.out.println("has parent? (infested from....(Y/N))");
+        if (sc.next().equalsIgnoreCase("Y")) {
+            System.out.print("enter parent id: ");
+            cid = sc.nextInt();
+        } else {
+            cid = 0;
+        }
+
+        System.out.print("enter typeId: ");
+        typeId = sc.nextInt();
+        _case.EditCase(id, age, gender, date, province, cid, typeId);
 
     }
 
@@ -248,7 +295,6 @@ public class DesignPattern_final {
         System.out.print("enter new name: ");
         name = sc.next();
         _type.EditType(id, name);
-
     }
 
     static void printBox(int n) {
@@ -265,7 +311,6 @@ public class DesignPattern_final {
                         "_____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ \n");
                 break;
         }
-
     }
 
     public static void testset() {
