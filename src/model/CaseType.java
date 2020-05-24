@@ -2,6 +2,7 @@ package model;
 
 import designpattern_final.Singleton;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -52,32 +53,25 @@ public class CaseType {
     public void setRelation(ArrayList<CaseType> relation) {
         this.relation = relation;
     }
-    
-// </editor-fold>
 
-    public void print(int depth) {
+// </editor-fold>
+    public void printChild(int depth) {
         for (int i = 0; i < depth; i++) {
             System.out.print(" | ");
         }
         System.out.println(" | id:" + id + " name:" + name);
-        
-//        if (parent != null) {
-//            System.out.print(" parent:" + parent.name);
-//        }
-//        System.out.println("");
 
         for (CaseType child : relation) {
-            child.print(depth + 1);
+            child.printChild(depth + 1);
         }
     }
 
-    
     public void addChild(CaseType child) {
 
         child.setParent(this);
         relation.add(child);
     }
-    
+
     public void remove() {
 
         if (parent != null) {
@@ -86,15 +80,25 @@ public class CaseType {
             parent.setRelation(parentRelation);
             instance.allType.set(parent.id, parent);
         }
-        for (CaseType child : relation) {
-            child.remove();
-        }
-        relation.removeAll(relation);
     }
-    
-    
-    public void add(){
-     instance.allType.add(this);
+
+    public void edit(int id, String name) {
+        this.id = id;
+        this.name = name;
+        update(0);
+    }
+
+    public void update(int depth) {
+
+        System.out.println(name);
+        for (CaseType child : relation) {
+            child.update(depth + 1);
+        }
+
+    }
+
+    public void add() {
+        instance.allType.add(this);
     }
 
     @Override

@@ -8,11 +8,8 @@ public class Singleton {
 
    private static Singleton instance = null;
    
-   public enum caseType{
-       
-   }
 
-   
+
    public ArrayList allCase;
    
    public ArrayList allType;

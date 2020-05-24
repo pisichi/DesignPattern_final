@@ -29,11 +29,11 @@ public class CaseController {
     }
 
     public CaseData SearchType(int typeId) {
-
+        
         for (int i = 0; i < instance.allCase.size(); i++) {
             CaseData t = (CaseData) instance.allCase.get(i);
             if (t.getType().getId() == typeId) {
-                return t;
+                System.out.println(t.toString());
             }
         }
         return null;
@@ -59,7 +59,7 @@ public class CaseController {
 
     }
 
-    public void print(int id) {
+    public void print() {
 
         for (int i = 0; i < instance.allCase.size(); i++) {
             CaseData t = (CaseData) instance.allCase.get(i);
